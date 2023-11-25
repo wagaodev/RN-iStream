@@ -7,6 +7,8 @@ export const Container = styled.View`
   background-color: ${theme.colors.base.gray5};
 `;
 
+export const ContainerName = styled.View``;
+
 export const Title = styled.Text`
   padding: 10px;
 `;
