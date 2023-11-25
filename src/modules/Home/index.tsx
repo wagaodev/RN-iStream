@@ -1,12 +1,8 @@
 import React, { useEffect } from 'react';
 import { api } from '../../service/api';
-import * as S from './styles';
+import { TData } from './types';
 
-type TData = {
-  id: number;
-  name: string;
-  email: string;
-}[];
+import * as S from './styles';
 
 export const Home = () => {
   const [data, setData] = React.useState<TData>([]);
