@@ -15,8 +15,8 @@ if (__DEV__ && !console.tron) {
   const hostName = '127.0.0.1';
   const tron = Reactotron.configure({
     host: hostName,
-    name: 'React Banking',
-    getClientId: async () => 'app-react-banking-reactotron',
+    name: 'iStream',
+    getClientId: async () => 'istream',
   })
     .useReactNative({
       networking: {
