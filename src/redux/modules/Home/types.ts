@@ -1,1 +1,5 @@
-export type THomeState = {};
+export type TInitialState = {
+  id: number;
+  name: string;
+  email: string;
+};

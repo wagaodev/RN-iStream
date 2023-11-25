@@ -1,15 +1,20 @@
-import type { Draft, PayloadAction } from '@reduxjs/toolkit';
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { THomeState } from '.';
+const initialState = {
+  id: 0,
+  name: '',
+  email: '',
+};
 
-const initialState: THomeState = {};
-
-export const slice = createSlice({
-  name: 'home',
+export const userSlice = createSlice({
+  name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+    setUser: (state, action: PayloadAction<typeof initialState>) => {
+      return { ...state, ...action.payload };
+    },
+  },
 });
 
-// export const { setHome } = slice.actions;
-export default slice.reducer;
+export const { setUser } = userSlice.actions;
+export default userSlice.reducer;

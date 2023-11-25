@@ -1,29 +1,34 @@
 import React, { useEffect } from 'react';
-import { api } from '../../service/api';
-import { TData } from './types';
+import {
+  RootState,
+  setUserAction,
+  useAppDispatch,
+  useAppSelector,
+} from '../../redux';
 
 import * as S from './styles';
 
 export const Home = () => {
-  const [data, setData] = React.useState<TData>([]);
+  const dispatch = useAppDispatch();
+  const { name, email } = useAppSelector((state: RootState) => {
+    return {
+      name: state.home.name,
+      email: state.home.email,
+    };
+  });
 
-  const handleApiGet = async () => {
-    const response = await api.get('/users');
-    setData(response.data);
-    console.log(response.data);
-  };
+  const handleGetInfo = async () => await dispatch(setUserAction());
 
   useEffect(() => {
-    handleApiGet();
-  }, []);
+    handleGetInfo();
+  }, [name, email]);
 
   return (
     <S.Container>
-      {data.map(item => (
-        <S.ContainerName key={item.id}>
-          <S.Title>Olá {item.name}</S.Title>
-        </S.ContainerName>
-      ))}
+      <S.ContainerName>
+        <S.Title>Olá {(!!name && name) || 'Mundo'}</S.Title>
+        <S.Title>{email ? `Seu email é: ${email}` : ''}</S.Title>
+      </S.ContainerName>
     </S.Container>
   );
 };
