@@ -2,8 +2,11 @@ import React, { ReactNode } from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 import { ThemeProvider } from 'styled-components';
 
+import { persistor, store } from '../../redux';
 import { theme } from '../../theme';
 
 interface ProvidersProps {
@@ -13,9 +16,13 @@ interface ProvidersProps {
 export function Providers({ children }: ProvidersProps) {
   return (
     <ThemeProvider theme={theme}>
-      <SafeAreaProvider>
-        <NavigationContainer>{children}</NavigationContainer>
-      </SafeAreaProvider>
+      <Provider store={store}>
+        <PersistGate persistor={persistor}>
+          <SafeAreaProvider>
+            <NavigationContainer>{children}</NavigationContainer>
+          </SafeAreaProvider>
+        </PersistGate>
+      </Provider>
     </ThemeProvider>
   );
 }
